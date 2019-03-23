@@ -1,0 +1,193 @@
+\documentclass{standalone}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+
+\begin{document}
+
+\begin{tikzpicture}[remember picture]
+
+% created an arrow object(tikzstyle)
+  \tikzstyle{arrow} = [thick,->,>=stealth, line width=1.80pt]
+  \tikzstyle{dashedArrow} = [dashed,thick,->,>=stealth, line width=0.40pt]
+
+
+% ****      pictures       ******************************************************************
+  \node (synsetCorpus) {\includegraphics[scale=0.67]{resources/document_blue.png}};
+
+
+% upper rectangle
+%--------------------------------------------------------------------------------------------
+  \node (upperRect)[
+    draw,
+    dashed,
+    above right = of synsetCorpus,
+    xshift=-0.5cm,
+    yshift=-1.4cm,
+    ]{ % grouping nodes inside another node
+      \begin{tikzpicture}
+         \node (modelBlue)[xshift=0.1cm, yshift=0.0cm]
+            {\includegraphics[scale=0.6]{resources/model_blue.png}};
+
+         \node (modelGray)[right= of  modelBlue, xshift=-1.8cm, yshift=-0.2cm] 
+            {\includegraphics[scale=0.6]{resources/model_gray.png}};
+
+         \node (upperJigsaw)[left= of  modelBlue,xshift=1.6cm]
+            {\includegraphics[scale=0.5]{resources/jigsaw.png}};
+
+         \node (txtFLLC)[left= of  modelBlue,align=center,xshift=1.1cm,yshift=0.8cm] 
+            {\footnotesize FLLC};
+
+      \end{tikzpicture}
+    };
+%-------------------------------------------------------------------------------------------
+
+
+% bottom rectangle
+%-------------------------------------------------------------------------------------------
+  \node (bottomRect)[
+    draw,
+    dashed,
+    %minimum width = 3.5cm,
+    %minimum height = 2.0cm,
+    below right = of synsetCorpus,
+    xshift=-0.5cm,
+    yshift=1.4cm,
+    ]{% grouping nodes inside another node
+        \begin{tikzpicture}
+            \node (modelBlue2)[xshift=0.1cm, yshift=0.0cm] 
+                {\includegraphics[scale=0.6]{resources/model_blue.png}};
+
+            \node (model)[right= of modelBlue2,xshift=-1.8cm, yshift=-0.2cm] 
+                {\includegraphics[scale=0.6]{resources/model_black.png}};
+
+            \node (bottomJigsaw)[left = of modelBlue2,xshift=1.6cm]
+                {\includegraphics[scale=0.5]{resources/jigsaw.png}};
+
+            \node (txtFXLC)[left = of modelBlue2,align=center,xshift=1.1cm,yshift=0.8cm] 
+                {\footnotesize FXLC};
+
+        \end{tikzpicture}
+    };
+
+  
+%-------------------------------------------------------------------------------------------
+
+
+% documents blue and yellow
+%-------------------------------------------------------------------------------------------
+  \node (synsetCorpusA)[right of = upperRect,node distance= 3.6cm]
+    {\includegraphics[scale=0.67]{resources/document_blue.png}};
+
+  \node (synsetCorpusB)[right of = bottomRect,node distance= 3.6cm]
+    {\includegraphics[scale=0.67]{resources/document_yellow.png}};
+%-------------------------------------------------------------------------------------------
+
+
+% three black boxes
+%-------------------------------------------------------------------------------------------
+    \node (groupBoxes)[below right=  of synsetCorpusA,yshift=1.6cm,xshift=-0.5cm]{
+        \begin{tikzpicture}
+            \node (alg1)[]
+                {\includegraphics[scale=0.7]{resources/model_icon}};
+
+            \node (alg2)[right of = alg1,xshift=-0.5cm,yshift=-1.05cm]
+                {\includegraphics[scale=0.5]{resources/model_icon}};
+
+            \node (alg3)[right of = alg1,xshift=-1.5cm,yshift=-1.05cm]
+                {\includegraphics[scale=0.5]{resources/model_icon}};
+
+        \end{tikzpicture}
+    };
+  %-------------------------------------------------------------------------------------------
+
+
+% three models (blue, yellow, black)
+%------------------------------------------------------------------------------------------
+  \node (groupModels)[right = of groupBoxes,xshift=-0.3cm]{
+      \begin{tikzpicture}
+         \node (modelBlue3)[]
+            {\includegraphics[scale=0.5]{resources/model_blue}};
+
+         \node (modelYellow)[right of = modelBlue3, xshift=-0.1cm]
+            {\includegraphics[scale=0.5]{resources/model_yellow}};
+
+         \node (model2)[right of = modelBlue3,xshift=-0.6cm, yshift=-0.4cm]
+            {\includegraphics[scale=0.5]{resources/model_black}};
+     \end{tikzpicture}
+
+  };
+%-------------------------------------------------------------------------------------------
+
+
+% Results
+%-------------------------------------------------------------------------------------------
+  \node (task) [right of =groupModels,node distance = 3.0cm, yshift=-0.0cm]
+    {\includegraphics[scale=0.38]{resources/word_similarity.png}};
+%-------------------------------------------------------------------------------------------
+%*******************************************************************************************
+
+
+
+
+% ****************** labels ****************************************************************
+  \node (txtSynsetCorpus)[below of = synsetCorpus,node distance=1.3cm, align=center]
+    {Synset\\Corpus};
+
+  \node (txtSynsetCorpusA)[below of = synsetCorpusA,node distance=1.3cm, align=center]
+   {A-Chain (Synset)\\Corpus};
+
+  \node (txtSynsetCorpusB)[below of = synsetCorpusB,node distance=1.3cm, align=center]
+    {B-Chain (Synset)\\Corpus};
+
+  \node (txtWordEmbedding)[below of = alg1,node distance=2.3cm, align=center]
+    {Word\\Embedding\\Algorithm};
+
+  \node (txtWordEmbedding)[below of = task,node distance=2.2cm, align=center]
+    {Document\\Similarity\\Task};
+
+  \node (txtChainAlg)[above of = upperRect,node distance=1.7cm, align=center]
+    {Lexical Chains\\Algorithm};
+
+  \node (txtModelGeneration)[above of = groupBoxes,node distance=2.0cm, align=center,xshift=1.6cm]
+    {Model\\Generation};
+
+  
+  \node (txtRecurrentApproach) [
+  draw,
+  dashed,
+  below of = synsetCorpusB,
+  align=center,
+  minimum width=2.5cm,
+  xshift=1cm,
+  yshift=-1.7cm
+  ] {Recurrent\\Approach};
+%*******************************************************************************************
+
+
+
+% coordinated ******************************************************************************
+  \node (c1)[shape=coordinate,below of = model2, node distance = 3.1cm,yshift=-0.2cm]{a};
+  \node (c2)[shape=coordinate,below of = bottomRect, node distance = 1.7cm,yshift=-0.2cm]{b};
+% ******************************************************************************************
+
+
+
+
+% ******************  arrows  **************************************************************
+    \draw[arrow] (synsetCorpus) edge [bend left = 30] (upperRect);
+    \draw[arrow] (synsetCorpus) edge [bend right = 30] (bottomRect);
+    \draw[arrow] (upperRect) -- (synsetCorpusA);
+    \draw[arrow] (bottomRect) -- (synsetCorpusB);
+    \draw[arrow] (synsetCorpusA) edge [bend left = 15] (alg1);
+    \draw[arrow] (synsetCorpusB) edge [bend right = 28] (alg3);
+    \draw[arrow] (groupBoxes) -- (groupModels);
+    \draw[arrow] (groupModels) -- (task);
+    \draw[dashedArrow] (groupModels)-- (c1)--(c2)--(bottomRect);
+% ******************************************************************************************
+
+\end{tikzpicture}
+
+\end{document}
+
+

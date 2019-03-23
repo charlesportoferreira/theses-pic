@@ -1,0 +1,92 @@
+\documentclass{standalone}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{shapes}
+
+\begin{document}
+
+\begin{tikzpicture}
+ % created an arrow object(tikzstyle)
+  \tikzstyle{arrow} = [thick,->,>=stealth, line width=1.80pt]
+  \tikzstyle{dashedArrow} = [dashed,thick,->,>=stealth, line width=0.40pt]
+
+
+  %*****   pictures     ***************************************************************
+  \node (corpus) {\includegraphics[scale=0.70]{resources/text}};
+
+  \node (chain) [right of = corpus, node distance = 2.5cm]
+    {\includegraphics[scale=0.45]{resources/chains}};
+
+  \node (corpusChains) [right of = chain, node distance = 2.5cm]
+    {\includegraphics[scale=0.70]{resources/annotaded}};
+
+  \node (embedAlg) [right of = corpusChains, node distance = 2.5cm]
+    {\includegraphics[scale=0.70]{resources/model_icon}};
+
+  \node (synsetModel) [right of = embedAlg, node distance = 2.5cm]
+    {\includegraphics[scale=0.70]{resources/model_black}};
+
+  \node (task) [right of = synsetModel, node distance = 3.1cm]
+    {\includegraphics[scale=0.50]{resources/ws_task.png}};
+  %************************************************************************************
+
+
+
+  %*****   labels     *****************************************************************
+  \node (txtCorpus)[below of = corpus, node distance = 1.4cm,align=center]
+    {Synset\\Corpus};
+
+  \node (txtChainAlg)[below of = chain, node distance = 1.6cm,align=center]
+    {Lexical\\Chain\\Algorithms};
+
+  \node (txtCorpusChains)[below of = corpusChains, node distance = 1.6cm,align=center]
+    {Chain\\(Synset)\\Corpus};
+
+  \node (txtEmbedAlg)[below of = embedAlg, node distance = 1.6cm,align=center]
+    {Word\\Embedding\\Corpus};
+
+  \node (txtSynsetModel)[below of = synsetModel, node distance = 1.6cm,align=center]
+    {Synset\\Embedding\\Model};
+
+  \node (txtTask)[below of = task, node distance = 1.6cm,align=center]
+    {Word\\Similarity\\Task};
+
+  \node (txtChainGeneration)
+    [draw,dashed,minimum width=2.5cm,minimum height=1cm, above of = chain, node distance = 1.5cm,align=center]
+    {FLLC/FXLC\\Generation};
+
+  \node (txtModelGeneration)
+  [draw,dashed,minimum width=2.5cm,minimum height=1cm,above of = embedAlg, node distance = 1.5cm,align=center]
+    {Model\\Generation};
+
+  \node (txtInferVectors)[draw,dashed,minimum width=2.5cm,minimum height=1cm,above of = synsetModel,xshift=1.2cm, node distance = 1.5cm,align=center]
+    {Infer Vector for\\Documents};
+
+  \node (txtRecurentApproach)[draw,dashed,minimum width=2.5cm,minimum height=1cm,below of = chain,xshift=3.7cm, node distance = 3.7cm,align=center]
+    {Recurrent\\Approach};
+
+
+  %************************************************************************************
+
+
+  %*****   coordinates     ************************************************************
+  \node (c1)[shape=coordinate,below of = synsetModel, node distance = 2.3cm]{};
+  \node (c2)[shape=coordinate,below of = synsetModel, node distance = 3cm]{};
+  \node (c3)[shape=coordinate,below of = chain, node distance = 3cm]{};
+  \node (c4)[shape=coordinate,below of = chain, node distance = 2.3cm]{};
+  %************************************************************************************
+
+
+  %*****   arrows     *****************************************************************
+  \draw[arrow] (corpus) -- (chain);
+  \draw[arrow] (chain) -- (corpusChains);
+  \draw[arrow] (corpusChains) -- (embedAlg);
+  \draw[arrow] (embedAlg) -- (synsetModel);
+  \draw[arrow] (synsetModel) -- (task);
+  \draw[dashedArrow] (c1) -- (c2) -- (c3) -- (c4);
+  %************************************************************************************
+
+
+\end{tikzpicture}
+
+\end{document}

@@ -1,0 +1,267 @@
+\documentclass{standalone}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+
+\begin{document}
+
+\begin{tikzpicture}[remember picture]
+
+% created an arrow object(tikzstyle)
+  \tikzstyle{arrow} = [thick,->,>=stealth, line width=1.80pt]
+  \tikzstyle{dashedArrow} = [dashed,thick,->,>=stealth, line width=0.40pt]
+
+
+% ****      pictures       ******************************************************************
+  \node (corpus) {\includegraphics[scale=0.67]{resources/text.png}};
+  
+
+
+% upper left rectangle
+% -------------------------------------------------------------------------------------------
+  \node (upperLefRect)[
+    draw,
+    dashed,
+    above right= of corpus,
+    xshift=-0.5cm,
+    yshift=-1.5cm,
+    ]{ % grouping nodes inside another node
+      \begin{tikzpicture}
+        \node (modelBlack3){\includegraphics[scale=0.5]{resources/model_black}};
+
+        \node (chain)[left = of modelBlack3,xshift=1.5cm,yshift=0.6cm]
+          {\includegraphics[scale=0.6]{resources/chains}};
+
+        \node (txtMSSA-MSSAD) [above = of modelBlack3,align=center, yshift=-1.0cm, xshift=0.2cm]
+          {\footnotesize MSSA\\\footnotesize MSSA-D};
+
+        \node (txtPlus) [left = of modelBlack3,align=center, yshift=-0.2cm, xshift=1.0cm]
+          {\huge \bf+};
+      \end{tikzpicture}
+    };
+%---------------------------------------------------------------------------------------------    
+
+
+
+
+% bottom left rectangle
+% -------------------------------------------------------------------------------------------
+  \node (bottomLefRect)[
+    draw,
+    dashed,
+    below right= of corpus,
+    xshift=-0.5cm,
+    yshift=1.5cm,
+    ]{ % grouping nodes inside another node
+      \begin{tikzpicture}
+        \node (modelYellow2){\includegraphics[scale=0.5]{resources/model_yellow}};
+
+        \node (chain2)[left = of modelYellow2,xshift=1.5cm,yshift=0.6cm]
+          {\includegraphics[scale=0.6]{resources/chains}};
+
+        \node (txtMSSANR) [above = of modelYellow2,align=center, yshift=-0.6cm, xshift=0.1cm]
+          {\footnotesize MSSA-NR};
+
+        \node (txtPlus2) [left = of modelYellow2,align=center, yshift=-0.2cm, xshift=1.0cm]
+          {\huge \bf+};
+
+      \end{tikzpicture}
+    };
+%---------------------------------------------------------------------------------------------    
+
+
+
+
+
+\node (synsetCorpus)[right= of upperLefRect, xshift=-0.3cm] 
+  {\includegraphics[scale=0.67]{resources/document_blue.png}};
+
+
+% upper right rectangle
+%--------------------------------------------------------------------------------------------
+  \node (upperRect)[
+    draw,
+    dashed,
+    right = of synsetCorpus,
+    xshift=-0.3cm,
+    ]{ % grouping nodes inside another node
+      \begin{tikzpicture}
+         \node (modelBlue)[xshift=0.1cm, yshift=0.0cm]
+            {\includegraphics[scale=0.6]{resources/model_blue.png}};
+
+         \node (modelGray)[right= of  modelBlue, xshift=-1.8cm, yshift=-0.2cm] 
+            {\includegraphics[scale=0.6]{resources/model_gray.png}};
+
+         \node (upperJigsaw)[left= of  modelBlue,xshift=1.6cm]
+            {\includegraphics[scale=0.5]{resources/jigsaw.png}};
+
+         \node (txtFLLC)[left= of  modelBlue,align=center,xshift=1.1cm,yshift=0.8cm] 
+            {\footnotesize FLLC};
+
+      \end{tikzpicture}
+    };
+%-------------------------------------------------------------------------------------------
+
+
+
+\node (synsetCorpusYellow)[right= of bottomLefRect, xshift=-0.3cm] 
+  {\includegraphics[scale=0.67]{resources/document_yellow.png}};
+
+
+% bottom right rectangle
+%-------------------------------------------------------------------------------------------
+  \node (bottomRect)[
+    draw,
+    dashed,
+    right = of synsetCorpusYellow,
+    xshift=-0.3cm,
+    ]{% grouping nodes inside another node
+        \begin{tikzpicture}
+            \node (modelBlue2)[xshift=0.1cm, yshift=0.0cm] 
+                {\includegraphics[scale=0.6]{resources/model_blue.png}};
+
+            \node (model)[right= of modelBlue2,xshift=-1.8cm, yshift=-0.2cm] 
+                {\includegraphics[scale=0.6]{resources/model_black.png}};
+
+            \node (bottomJigsaw)[left = of modelBlue2,xshift=1.6cm]
+                {\includegraphics[scale=0.5]{resources/jigsaw.png}};
+
+            \node (txtFXLC)[left = of modelBlue2,align=center,xshift=1.1cm,yshift=0.8cm] 
+                {\footnotesize FXLC};
+
+        \end{tikzpicture}
+    };
+
+  
+%-------------------------------------------------------------------------------------------
+
+
+% documents blue and yellow
+%-------------------------------------------------------------------------------------------
+  \node (synsetCorpusA)[right of = upperRect,node distance= 3.6cm]
+    {\includegraphics[scale=0.67]{resources/document_blue.png}};
+
+  \node (synsetCorpusB)[right of = bottomRect,node distance= 3.6cm]
+    {\includegraphics[scale=0.67]{resources/document_yellow.png}};
+%-------------------------------------------------------------------------------------------
+
+
+% three black boxes
+%-------------------------------------------------------------------------------------------
+    \node (groupBoxes)[below right=  of synsetCorpusA,yshift=1.6cm,xshift=-0.5cm]{
+        \begin{tikzpicture}
+            \node (alg1)[]
+                {\includegraphics[scale=0.7]{resources/model_icon}};
+
+            \node (alg2)[right of = alg1,xshift=-0.5cm,yshift=-1.05cm]
+                {\includegraphics[scale=0.5]{resources/model_icon}};
+
+            \node (alg3)[right of = alg1,xshift=-1.5cm,yshift=-1.05cm]
+                {\includegraphics[scale=0.5]{resources/model_icon}};
+
+        \end{tikzpicture}
+    };
+  %-------------------------------------------------------------------------------------------
+
+
+% three models (blue, yellow, black)
+%------------------------------------------------------------------------------------------
+  \node (groupModels)[below = of groupBoxes,xshift=0.0cm,yshift=0.5cm]{
+      \begin{tikzpicture}
+         \node (modelBlue3)[]
+            {\includegraphics[scale=0.5]{resources/model_blue}};
+
+         \node (modelYellow)[right of = modelBlue3, xshift=-0.1cm]
+            {\includegraphics[scale=0.5]{resources/model_yellow}};
+
+         \node (model2)[right of = modelBlue3,xshift=-0.6cm, yshift=-0.4cm]
+            {\includegraphics[scale=0.5]{resources/model_black}};
+     \end{tikzpicture}
+
+  };
+%-------------------------------------------------------------------------------------------
+
+
+% Natural Language Problems 
+%-------------------------------------------------------------------------------------------
+  \node (task) [right of =groupBoxes,node distance = 3.0cm, yshift=-0.0cm]
+    {\includegraphics[scale=0.38]{resources/word_similarity.png}};
+%-------------------------------------------------------------------------------------------
+%*******************************************************************************************
+
+
+
+
+% ****************** labels ****************************************************************
+  \node (txtSynsetCorpus)[below  of =corpus,node distance=1.5cm, align=center,xshift = -0.1cm]
+    {Original\\Word\\Corpus};
+
+  \node (txtASynsetCorpus) [below = of synsetCorpus, align=center,yshift=1.2cm]
+    {A - Synset\\Corpus};
+
+  \node (txtBSynsetCorpus) [below = of synsetCorpusYellow, align=center,yshift=1.2cm]
+    {B - Synset\\Corpus};
+
+  \node (txtSynsetCorpusA)[below of = synsetCorpusA,node distance=1.3cm, align=center]
+   {A-Chain (Synset)\\Corpus};
+
+  \node (txtSynsetCorpusB)[below of = synsetCorpusB,node distance=1.3cm, align=center]
+    {B-Chain (Synset)\\Corpus};
+
+  \node (txtWordEmbedding)[below of = task,node distance=2.2cm, align=center]
+    {Natural\\Language\\Problems};
+
+  \node (txtChainAlg)[above of = upperRect,node distance=1.7cm, align=center]
+    {Lexical Chains\\Algorithm};
+
+  \node (txtModelGeneration)[above of = groupBoxes,node distance=2.0cm, align=center,xshift=0.0cm]
+    {Model\\Generation};
+
+  \node (txtMSSAAlg)[below= of bottomLefRect,align=center,yshift=0.9cm]
+    {MSSA\\Algorithm};
+
+  
+  \node (txtRecurrentApproach) [
+  draw,
+  dashed,
+  below of = bottomRect,
+  align=center,
+  minimum width=2.5cm,
+  xshift=0cm,
+  yshift=-2.8cm
+  ] {Recurrent\\Approach};
+%*******************************************************************************************
+
+
+
+% coordinated ******************************************************************************
+  \node (c1)[shape=coordinate,below of = model2, node distance = 1.65cm]{a};
+  \node (c2)[shape=coordinate,below of = bottomRect, node distance = 3.0cm]{b};
+% ******************************************************************************************
+
+
+ 
+
+% ******************  arrows  **************************************************************
+    \draw[arrow] (corpus) edge [bend left = 30] (upperLefRect);
+    \draw[arrow] (corpus) edge [bend right = 30] (bottomLefRect);
+    \draw[arrow] (upperLefRect) -- (synsetCorpus);
+    \draw[arrow] (bottomLefRect) -- (synsetCorpusYellow);
+    \draw[arrow] (synsetCorpus) -- (upperRect);
+    \draw[arrow] (synsetCorpusYellow) -- (bottomRect);
+    \draw[arrow] (upperRect) -- (synsetCorpusA);
+    \draw[arrow] (bottomRect) -- (synsetCorpusB);
+    \draw[arrow] (synsetCorpusA) edge [bend left = 15] (alg1);
+    \draw[arrow] (synsetCorpusB) edge [bend right = 28] (alg3);
+    \draw[arrow] (groupBoxes) -- (groupModels);
+    \draw[arrow] (groupBoxes) -- (task);
+    \draw[dashedArrow] (groupModels)-- (c1)-- (c2) -- (bottomRect);
+    \draw[dashedArrow] (c2)-| (txtMSSAAlg);
+
+% ******************************************************************************************
+
+\end{tikzpicture}
+
+\end{document}
+
+
